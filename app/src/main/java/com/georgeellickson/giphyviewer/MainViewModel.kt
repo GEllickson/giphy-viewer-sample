@@ -7,13 +7,24 @@ import javax.inject.Inject
 
 class MainViewModel(private val pref: GiphyKeyPref) : ViewModel() {
 
-    fun hasApiKey() = pref.hasApiKey()
+    // Function instead of LiveData as we should populate the first fragment immediately
+    fun getStartState(): LaunchStartState =
+        if (pref.hasApiKey()) {
+            LaunchStartState.HOME
+        } else {
+            LaunchStartState.SETTINGS
+        }
 
 }
 
-class MainViewModelFactory @Inject constructor(private val pref: GiphyKeyPref) : ViewModelProvider.Factory {
+class MainViewModelFactory @Inject constructor(private val pref: GiphyKeyPref) :
+    ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return MainViewModel(pref) as T
     }
+}
+
+enum class LaunchStartState {
+    HOME, SETTINGS
 }
