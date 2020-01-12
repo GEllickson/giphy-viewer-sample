@@ -1,6 +1,7 @@
 package com.georgeellickson.giphyviewer.di
 
 import com.georgeellickson.giphyviewer.MainActivity
+import com.georgeellickson.giphyviewer.home.HomeFragment
 import com.georgeellickson.giphyviewer.settings.SettingsFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -12,5 +13,7 @@ interface AppComponent {
     fun inject(activity: MainActivity)
 
     fun inject(fragment: SettingsFragment)
+
+    fun inject(fragment: HomeFragment)
 
 }
