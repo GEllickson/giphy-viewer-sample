@@ -13,9 +13,10 @@ class GiphyKeyPref @Inject constructor(context: Context) {
 
     fun setApiKey(apiKey: String) = prefs.edit().putString(KEY_API, apiKey).apply()
 
-
     fun getApiKey(): String = prefs.getString(KEY_API, "") ?: ""
 
     fun hasApiKey(): Boolean = getApiKey().isNotEmpty()
+
+    fun clear() = prefs.edit().clear().apply()
 
 }
