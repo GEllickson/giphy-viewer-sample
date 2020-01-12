@@ -53,7 +53,10 @@ dependencies {
     implementation rootProject.dagger
     kapt rootProject.daggerProcessor
     implementation rootProject.okhttp
+    implementation rootProject.moshi
+    kapt rootProject.moshiCodeGen
     implementation rootProject.retrofit
+    implementation rootProject.retrofitMoshi
     implementation rootProject.picasso
     implementation rootProject.timber
 
