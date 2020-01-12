@@ -1,0 +1,70 @@
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.georgeellickson.giphyviewer"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation rootProject.kotlinStd
+    implementation rootProject.kotlinxCoroutines
+
+    implementation rootProject.androidxAppcompat
+    implementation rootProject.androidxRecyclerview
+    implementation rootProject.androidxConstraintlayout
+    implementation rootProject.androidxCoreKtx
+    implementation rootProject.androidxLifecycleExtensions
+    implementation rootProject.androidxLifecycleViewModelKtx
+    kapt rootProject.androidxLifecycleCompiler
+    implementation rootProject.androidxRoomRuntime
+    kapt rootProject.androidxRoomCompiler
+    implementation rootProject.androidxPaging
+    implementation rootProject.androidxWorkRuntime
+    implementation rootProject.materialComponents
+
+    implementation rootProject.dagger
+    kapt rootProject.daggerProcessor
+    implementation rootProject.okhttp
+    implementation rootProject.retrofit
+    implementation rootProject.picasso
+    implementation rootProject.timber
+
+    testImplementation rootProject.junit
+    testImplementation rootProject.mockito
+    testImplementation rootProject.mockitoKotlin
+    testImplementation rootProject.okhttpMockServer
+
+    androidTestImplementation rootProject.androidxTestCore
+    androidTestImplementation rootProject.androidxTestRunner
+    androidTestImplementation rootProject.androidxTestRules
+    androidTestImplementation rootProject.androidxEspresso
+    androidTestImplementation rootProject.mockitoAndroid
+}
