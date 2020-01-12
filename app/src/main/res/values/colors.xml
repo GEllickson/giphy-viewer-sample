@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--> Minimum theme colors<-->
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#42a5f5</color>
+    <color name="colorPrimaryDark">#0077c2</color>
+    <color name="colorAccent">#ec407a</color>
 
     <!--> Additional Material Components colors corresponding to theme attribute names <-->
     <!--> "colorBackground" is not a theme attribute, but can be used with android:background <-->
