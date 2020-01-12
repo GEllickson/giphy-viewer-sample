@@ -2,4 +2,6 @@
     <string name="app_name">Giphy Viewer</string>
     <string name="title_settings">Settings</string>
     <string name="title_home">Trending Gifs</string>
+    <string name="hint_giphy_api_key">Giphy API key</string>
+    <string name="enter">Enter</string>
 </resources>
