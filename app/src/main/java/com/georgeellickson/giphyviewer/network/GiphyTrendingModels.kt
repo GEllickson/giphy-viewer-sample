@@ -16,8 +16,8 @@ data class GiphyTrendingItem(
 
 @JsonClass(generateAdapter = true)
 data class ItemImages(
-    @Json(name = "downsized_still") val stillImage: ImageMediumStill,
-    @Json(name = "downsized") val gif: ImageMediumGif,
+    @Json(name = "fixed_height_still") val stillImage: ImageMediumStill,
+    @Json(name = "fixed_height") val gif: ImageMediumGif,
     @Json(name = "preview") val preview: ImagePreview
 )
 
