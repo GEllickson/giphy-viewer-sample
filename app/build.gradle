@@ -57,7 +57,7 @@ dependencies {
     kapt rootProject.moshiCodeGen
     implementation rootProject.retrofit
     implementation rootProject.retrofitMoshi
-    implementation rootProject.picasso
+    implementation rootProject.glide
     implementation rootProject.timber
 
     testImplementation rootProject.junit
