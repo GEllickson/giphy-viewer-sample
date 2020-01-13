@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         viewModel.trendingGifs.observe(viewLifecycleOwner, Observer { items ->
             items.forEach { giphy ->
                 // TODO replace with RecyclerView impl
-                Timber.d(giphy.url)
+                Timber.d(giphy.toString())
             }
         })
 
