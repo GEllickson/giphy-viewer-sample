@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.georgeellickson.giphyviewer.HomeViewModel
-import com.georgeellickson.giphyviewer.HomeViewModelFactory
 import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.appComponent
 import timber.log.Timber
@@ -18,7 +15,7 @@ import javax.inject.Inject
 class HomeFragment : Fragment() {
 
     @Inject
-    lateinit var viewModelFactory: HomeViewModelFactory
+    lateinit var viewModelFactory: HomeViewModel.Factory
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
