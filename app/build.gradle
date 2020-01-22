@@ -36,6 +36,7 @@ dependencies {
 
     implementation rootProject.kotlinStd
     implementation rootProject.kotlinxCoroutines
+    implementation rootProject.kotlinxCoroutinesAndroid
 
     implementation rootProject.androidxAppcompat
     implementation rootProject.androidxRecyclerview
