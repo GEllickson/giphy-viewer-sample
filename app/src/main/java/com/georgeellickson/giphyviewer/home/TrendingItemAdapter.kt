@@ -30,7 +30,7 @@ class TrendingItemAdapter : ListAdapter<GiphyTrendingItem, TrendingItemAdapter.V
         fun bindViews(item: GiphyTrendingItem) {
             Glide.with(gifImage.context)
                 .asGif()
-                .load(item.images.gif)
+                .load(item.images.gif.url)
                 .into(gifImage)
         }
     }
