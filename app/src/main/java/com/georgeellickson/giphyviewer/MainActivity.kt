@@ -8,7 +8,7 @@ import com.georgeellickson.giphyviewer.home.HomeFragment
 import com.georgeellickson.giphyviewer.settings.SettingsFragment
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NavController {
+class MainActivity : AppCompatActivity(R.layout.activity_main), NavController {
 
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity(), NavController {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         application.appComponent.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
 

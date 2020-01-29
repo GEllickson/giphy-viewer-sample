@@ -2,9 +2,7 @@ package com.georgeellickson.giphyviewer.home
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,24 +12,20 @@ import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.appComponent
 import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var viewModelFactory: HomeViewModel.Factory
     private lateinit var viewModel: HomeViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         requireActivity().apply {
             title = getString(R.string.title_home)
             application.appComponent.inject(this@HomeFragment)
         }
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(HomeViewModel::class.java)
-
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         val trendingItemAdapter = TrendingItemAdapter()
         // TODO consider alternative approach to item sizing and number of columns
@@ -46,7 +40,5 @@ class HomeFragment : Fragment() {
         viewModel.trendingGifs.observe(viewLifecycleOwner, Observer { items ->
             trendingItemAdapter.submitList(items)
         })
-
-        return view
     }
 }
