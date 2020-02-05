@@ -1,9 +1,9 @@
 package com.georgeellickson.giphyviewer
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.georgeellickson.giphyviewer.home.HomeFragment
 import com.georgeellickson.giphyviewer.settings.SettingsFragment
 import javax.inject.Inject
@@ -12,12 +12,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), NavController {
 
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         application.appComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
 
         if (savedInstanceState == null) {
             val fragment: Fragment = when (viewModel.getStartState()) {

@@ -6,8 +6,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.appComponent
 import com.georgeellickson.giphyviewer.home.HomeFragment
@@ -18,7 +18,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     @Inject
     lateinit var viewModelFactory: SettingsViewModelFactory
-    private lateinit var viewModel: SettingsViewModel
+    private val viewModel: SettingsViewModel by viewModels { viewModelFactory }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,7 +27,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             application.appComponent.inject(this@SettingsFragment)
         }
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SettingsViewModel::class.java)
         viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
             requireActivity().navController.navigateTo(HomeFragment())
         })

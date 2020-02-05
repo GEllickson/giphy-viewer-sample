@@ -4,8 +4,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.georgeellickson.giphyviewer.R
@@ -16,7 +16,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var viewModelFactory: HomeViewModel.Factory
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModels { viewModelFactory }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,8 +24,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             title = getString(R.string.title_home)
             application.appComponent.inject(this@HomeFragment)
         }
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(HomeViewModel::class.java)
 
         val trendingItemAdapter = TrendingItemAdapter()
         // TODO consider alternative approach to item sizing and number of columns
