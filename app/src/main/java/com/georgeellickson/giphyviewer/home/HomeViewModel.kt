@@ -1,9 +1,7 @@
 package com.georgeellickson.giphyviewer.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.georgeellickson.giphyviewer.network.ApiResponse
 import com.georgeellickson.giphyviewer.network.GiphyTrendingItem
 import com.georgeellickson.giphyviewer.storage.GiphyRepository
 import kotlinx.coroutines.launch
@@ -11,11 +9,24 @@ import javax.inject.Inject
 
 class HomeViewModel(private val giphyRepo: GiphyRepository) : ViewModel() {
 
-    val trendingGifs: LiveData<List<GiphyTrendingItem>> = giphyRepo.trendingGifs
+    private val _trendingGifs = MutableLiveData<List<GiphyTrendingItem>>()
+    val trendingGifs: LiveData<List<GiphyTrendingItem>>
+        get() = _trendingGifs
 
     init {
         viewModelScope.launch {
-            giphyRepo.refreshTrendingGifs()
+            loadGifs()
+        }
+    }
+
+    private suspend fun loadGifs() {
+        when (val response = giphyRepo.refreshTrendingGifs()) {
+            is ApiResponse.Success -> {
+                _trendingGifs.postValue(response.data)
+            }
+            is ApiResponse.Error -> {
+                // TODO use observable error
+            }
         }
     }
 
