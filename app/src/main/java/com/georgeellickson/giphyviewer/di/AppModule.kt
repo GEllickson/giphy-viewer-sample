@@ -1,6 +1,5 @@
 package com.georgeellickson.giphyviewer.di
 
-import android.content.Context
 import com.georgeellickson.giphyviewer.network.GiphyApiService
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -9,10 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
-class AppModule(private val context: Context) {
-
-    @Provides
-    fun context(): Context = context
+class AppModule {
 
     @Provides
     fun giphyApiService(): GiphyApiService {
