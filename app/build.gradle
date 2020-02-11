@@ -55,6 +55,7 @@ dependencies {
     implementation androidxPaging
     implementation androidxWorkRuntime
     implementation materialComponents
+    implementation swipeRefresh
 
     implementation dagger
     kapt daggerProcessor

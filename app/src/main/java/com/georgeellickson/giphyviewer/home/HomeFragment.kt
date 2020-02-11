@@ -10,11 +10,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.appComponent
 import com.georgeellickson.giphyviewer.navController
@@ -50,9 +52,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             layoutManager = GridLayoutManager(view.context, columns)
         }
         val loadingView = view.findViewById<View>(R.id.loading_view)
+        val swipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).apply {
+            setOnRefreshListener { viewModel.refreshLatestGifs() }
+            setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorAccent))
+        }
 
         viewModel.trendingGifs.observe(viewLifecycleOwner, Observer { items ->
             trendingItemAdapter.submitList(items)
+            swipeRefresh.isRefreshing = false
         })
         viewModel.navigateToSettings.observe(viewLifecycleOwner, Observer {
             requireActivity().navController.navigateTo(SettingsFragment())

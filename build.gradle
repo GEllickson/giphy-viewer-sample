@@ -30,6 +30,7 @@ buildscript {
         androidxPaging = "androidx.paging:paging-runtime:2.1.1"
         androidxWorkRuntime = "androidx.work:work-runtime:2.2.0"
         materialComponents = "com.google.android.material:material:1.1.0-rc01"
+        swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
         // Non-Google
         daggerVersion = "2.25.4"
