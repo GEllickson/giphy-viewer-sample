@@ -59,6 +59,7 @@ dependencies {
     implementation rootProject.dagger
     kapt rootProject.daggerProcessor
     implementation rootProject.okhttp
+    implementation rootProject.okhttpLogging
     implementation rootProject.moshi
     kapt rootProject.moshiCodeGen
     implementation rootProject.retrofit

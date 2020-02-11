@@ -37,6 +37,7 @@ buildscript {
         daggerProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
         okhttpVersion = "4.3.1"
         okhttp = "com.squareup.okhttp3:okhttp:$okhttpVersion"
+        okhttpLogging = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
         moshiVersion = "1.9.2"
         moshi = "com.squareup.moshi:moshi:$moshiVersion"
         moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
