@@ -4,7 +4,7 @@ import android.app.Activity
 import androidx.fragment.app.Fragment
 
 interface NavController {
-    fun navigateTo(fragment: Fragment)
+    fun navigateTo(fragment: Fragment, backStack: Boolean)
 }
 
 val Activity.navController: NavController

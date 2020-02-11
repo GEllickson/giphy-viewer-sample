@@ -43,7 +43,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         toolbar = view.findViewById(R.id.toolbar)
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        val trendingItemAdapter = TrendingItemAdapter()
+        val trendingItemAdapter = TrendingItemAdapter {
+            requireActivity().navController.navigateTo(ViewImageFragment.newInstance(it), true)
+        }
         // TODO consider alternative approach to item sizing and number of columns
         val isLandscape = requireContext().resources.configuration
             .orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -63,7 +65,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             swipeRefresh.isRefreshing = false
         })
         viewModel.navigateToSettings.observe(viewLifecycleOwner, Observer {
-            requireActivity().navController.navigateTo(SettingsFragment())
+            requireActivity().navController.navigateTo(SettingsFragment(), false)
         })
         viewModel.loadingSpinnerVisible.observe(viewLifecycleOwner, Observer {
             loadingView.visibility = if (it) View.VISIBLE else View.GONE

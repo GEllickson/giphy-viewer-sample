@@ -33,7 +33,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         requireActivity().title = getString(R.string.title_settings)
 
         viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
-            requireActivity().navController.navigateTo(HomeFragment())
+            requireActivity().navController.navigateTo(HomeFragment(), false)
         })
 
         val editText = view.findViewById<EditText>(R.id.edit_api_key).apply {

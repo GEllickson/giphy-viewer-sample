@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.network.GiphyTrendingItem
 
-class TrendingItemAdapter : ListAdapter<GiphyTrendingItem, TrendingItemAdapter.ViewHolder>(DiffCallback()) {
+class TrendingItemAdapter(private val clickListener: (String) -> Unit) : ListAdapter<GiphyTrendingItem, TrendingItemAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,18 +20,22 @@ class TrendingItemAdapter : ListAdapter<GiphyTrendingItem, TrendingItemAdapter.V
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindViews(getItem(position))
+        holder.bindViews(getItem(position), clickListener)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val gifImage: ImageView = view.findViewById(R.id.image_gif)
 
-        fun bindViews(item: GiphyTrendingItem) {
-            gifImage.clipToOutline = true
+        fun bindViews(item: GiphyTrendingItem, clickListener: (String) -> Unit) {
+            val url = item.images.gif.url
+            gifImage.apply {
+                clipToOutline = true
+                setOnClickListener { clickListener(url) }
+            }
             Glide.with(gifImage.context)
                 .asGif()
-                .load(item.images.gif.url)
+                .load(url)
                 .into(gifImage)
         }
     }

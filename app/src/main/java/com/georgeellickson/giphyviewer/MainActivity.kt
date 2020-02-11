@@ -21,14 +21,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), NavController {
                 LaunchStartState.HOME -> HomeFragment()
                 LaunchStartState.SETTINGS -> SettingsFragment()
             }
-            navigateTo(fragment)
+            navigateTo(fragment, false)
         }
     }
 
-    override fun navigateTo(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
+    override fun navigateTo(fragment: Fragment, backStack: Boolean) {
+        val transaction = supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
             .replace(android.R.id.content, fragment)
-            .commit()
+        if (backStack) {
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
     }
 }
