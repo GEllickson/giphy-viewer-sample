@@ -10,6 +10,6 @@ class StringProvider @Inject constructor(private val context: Context) {
 
     fun getString(@StringRes resId: Int): String = context.getString(resId)
 
-    fun getString(@StringRes resId: Int, vararg args: Any?) = context.getString(resId, args)
+    fun getString(@StringRes resId: Int, vararg args: Any?) = context.getString(resId, *args)
 
 }
