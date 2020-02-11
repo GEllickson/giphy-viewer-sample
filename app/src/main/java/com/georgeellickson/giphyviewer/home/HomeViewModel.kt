@@ -10,6 +10,7 @@ import com.georgeellickson.giphyviewer.util.StringProvider
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 class HomeViewModel(
@@ -32,6 +33,8 @@ class HomeViewModel(
     private val _toastMessage = SingleLiveEvent<String>()
     val toastMessage: LiveData<String>
         get() = _toastMessage
+
+    private val isRefreshing = AtomicBoolean(false)
 
     init {
         viewModelScope.launch {
@@ -68,6 +71,16 @@ class HomeViewModel(
     fun clearApiKey() {
         giphyRepo.clearApiKey()
         _navigateToSettings.callOnChanged()
+    }
+
+    fun refreshLatestGifs() {
+        if (isRefreshing.compareAndSet(false, true)) {
+            _trendingGifs.value = emptyList()
+            viewModelScope.launch {
+                loadGifs()
+                isRefreshing.set(false)
+            }
+        }
     }
 
     class Factory @Inject constructor(

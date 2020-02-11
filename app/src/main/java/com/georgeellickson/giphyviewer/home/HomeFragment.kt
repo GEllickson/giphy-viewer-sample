@@ -53,7 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             requireActivity().navController.navigateTo(SettingsFragment())
         })
         viewModel.loadingSpinnerVisible.observe(viewLifecycleOwner, Observer {
-            loadingView.visibility = if(it) View.VISIBLE else View.GONE
+            loadingView.visibility = if (it) View.VISIBLE else View.GONE
         })
         viewModel.toastMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
@@ -66,11 +66,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.clear_api_key) {
-            viewModel.clearApiKey()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.clear_api_key -> {
+                viewModel.clearApiKey()
+                true
+            }
+            R.id.refresh_gifs -> {
+                viewModel.refreshLatestGifs()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

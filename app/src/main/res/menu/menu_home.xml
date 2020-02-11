@@ -7,4 +7,10 @@
         android:title="@string/menu_item_clear_api_key"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/refresh_gifs"
+        android:title="@string/menu_item_clear_api_key"
+        android:icon="@drawable/refresh_black_24dp"
+        app:showAsAction="ifRoom" />
+
 </menu>
