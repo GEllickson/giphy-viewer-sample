@@ -8,6 +8,6 @@ interface GiphyApiService {
     @GET("gifs/trending")
     suspend fun getTrending(
         @Query("api_key") api_key: String,
-        @Query("limit") limit: Int = 20): GiphyTrendingHolder
+        @Query("limit") limit: Int = 40): GiphyTrendingHolder
 
 }
