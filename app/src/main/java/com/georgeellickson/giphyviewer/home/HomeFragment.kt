@@ -21,6 +21,7 @@ import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.appComponent
 import com.georgeellickson.giphyviewer.navController
 import com.georgeellickson.giphyviewer.settings.SettingsFragment
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -68,7 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             loadingView.visibility = if (it) View.VISIBLE else View.GONE
         })
         viewModel.toastMessage.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show()
         })
     }
 
