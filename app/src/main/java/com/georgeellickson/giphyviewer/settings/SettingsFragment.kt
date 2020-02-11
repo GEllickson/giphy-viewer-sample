@@ -1,5 +1,6 @@
 package com.georgeellickson.giphyviewer.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -20,12 +21,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     lateinit var viewModelFactory: SettingsViewModelFactory
     private val viewModel: SettingsViewModel by viewModels { viewModelFactory }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().application.appComponent.inject(this@SettingsFragment)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().apply {
-            title = getString(R.string.title_settings)
-            application.appComponent.inject(this@SettingsFragment)
-        }
+        requireActivity().title = getString(R.string.title_settings)
 
         viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
             requireActivity().navController.navigateTo(HomeFragment())

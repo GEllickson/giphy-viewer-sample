@@ -1,5 +1,6 @@
 package com.georgeellickson.giphyviewer.home
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -18,12 +19,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var viewModelFactory: HomeViewModel.Factory
     private val viewModel: HomeViewModel by viewModels { viewModelFactory }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().application.appComponent.inject(this@HomeFragment)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().apply {
-            title = getString(R.string.title_home)
-            application.appComponent.inject(this@HomeFragment)
-        }
+        requireActivity().title = getString(R.string.title_home)
 
         val trendingItemAdapter = TrendingItemAdapter()
         // TODO consider alternative approach to item sizing and number of columns
