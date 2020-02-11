@@ -17,4 +17,6 @@ class GiphyRepository @Inject constructor(
         }
     }
 
+    fun clearApiKey() = keyPref.clear()
+
 }

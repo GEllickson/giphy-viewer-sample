@@ -4,4 +4,5 @@
     <string name="title_home">Trending Gifs</string>
     <string name="hint_giphy_api_key">Giphy API key</string>
     <string name="enter">Enter</string>
+    <string name="menu_item_clear_api_key">Clear API Key</string>
 </resources>
