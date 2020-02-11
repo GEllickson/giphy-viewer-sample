@@ -28,6 +28,7 @@ class TrendingItemAdapter : ListAdapter<GiphyTrendingItem, TrendingItemAdapter.V
         private val gifImage: ImageView = view.findViewById(R.id.image_gif)
 
         fun bindViews(item: GiphyTrendingItem) {
+            gifImage.clipToOutline = true
             Glide.with(gifImage.context)
                 .asGif()
                 .load(item.images.gif.url)
