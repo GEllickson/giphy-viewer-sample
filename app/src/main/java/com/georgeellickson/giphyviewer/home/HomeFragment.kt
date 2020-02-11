@@ -8,6 +8,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -24,6 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     @Inject
     lateinit var viewModelFactory: HomeViewModel.Factory
     private val viewModel: HomeViewModel by viewModels { viewModelFactory }
+    private lateinit var toolbar: Toolbar
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -35,6 +38,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         requireActivity().title = getString(R.string.title_home)
         setHasOptionsMenu(true)
 
+        toolbar = view.findViewById(R.id.toolbar)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
         val trendingItemAdapter = TrendingItemAdapter()
         // TODO consider alternative approach to item sizing and number of columns
         val isLandscape = requireContext().resources.configuration
@@ -58,6 +63,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.toastMessage.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onDestroyView() {
+        (requireActivity() as AppCompatActivity).setSupportActionBar(null)
+        super.onDestroyView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
