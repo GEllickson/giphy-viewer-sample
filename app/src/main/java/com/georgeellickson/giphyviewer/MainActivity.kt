@@ -1,7 +1,6 @@
 package com.georgeellickson.giphyviewer
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.georgeellickson.giphyviewer.home.HomeFragment
@@ -11,8 +10,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(R.layout.activity_main), NavController {
 
     @Inject
-    lateinit var viewModelFactory: MainViewModelFactory
-    private val viewModel: MainViewModel by viewModels { viewModelFactory }
+    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

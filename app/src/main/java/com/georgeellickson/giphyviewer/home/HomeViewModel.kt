@@ -33,6 +33,7 @@ class HomeViewModel(private val giphyRepo: GiphyRepository) : ViewModel() {
     class Factory @Inject constructor(private val repo: GiphyRepository) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
             return HomeViewModel(repo) as T
         }
     }

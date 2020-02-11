@@ -27,6 +27,7 @@ class SettingsViewModelFactory @Inject constructor(private val pref: GiphyKeyPre
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        @Suppress("UNCHECKED_CAST")
         return SettingsViewModel(pref) as T
     }
 }
