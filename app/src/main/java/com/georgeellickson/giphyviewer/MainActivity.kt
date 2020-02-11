@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), NavController {
 
     override fun navigateTo(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content, fragment).commit()
+            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
+            .replace(android.R.id.content, fragment)
+            .commit()
     }
 }
