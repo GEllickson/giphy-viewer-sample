@@ -38,43 +38,43 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    implementation rootProject.kotlinStd
-    implementation rootProject.kotlinxCoroutines
-    implementation rootProject.kotlinxCoroutinesAndroid
+    implementation kotlinStd
+    implementation kotlinxCoroutines
+    implementation kotlinxCoroutinesAndroid
 
-    implementation rootProject.androidxAppcompat
-    implementation rootProject.androidxFragment
-    implementation rootProject.androidxRecyclerview
-    implementation rootProject.androidxConstraintlayout
-    implementation rootProject.androidxCoreKtx
-    implementation rootProject.androidxLifecycleLiveDataKtx
-    implementation rootProject.androidxLifecycleViewModelKtx
-    kapt rootProject.androidxLifecycleCompiler
-    implementation rootProject.androidxRoomRuntime
-    kapt rootProject.androidxRoomCompiler
-    implementation rootProject.androidxPaging
-    implementation rootProject.androidxWorkRuntime
-    implementation rootProject.materialComponents
+    implementation androidxAppcompat
+    implementation androidxFragment
+    implementation androidxRecyclerview
+    implementation androidxConstraintlayout
+    implementation androidxCoreKtx
+    implementation androidxLifecycleLiveDataKtx
+    implementation androidxLifecycleViewModelKtx
+    kapt androidxLifecycleCompiler
+    implementation androidxRoomRuntime
+    kapt androidxRoomCompiler
+    implementation androidxPaging
+    implementation androidxWorkRuntime
+    implementation materialComponents
 
-    implementation rootProject.dagger
-    kapt rootProject.daggerProcessor
-    implementation rootProject.okhttp
-    implementation rootProject.okhttpLogging
-    implementation rootProject.moshi
-    kapt rootProject.moshiCodeGen
-    implementation rootProject.retrofit
-    implementation rootProject.retrofitMoshi
-    implementation rootProject.glide
-    implementation rootProject.timber
+    implementation dagger
+    kapt daggerProcessor
+    implementation okhttp
+    implementation okhttpLogging
+    implementation moshi
+    kapt moshiCodeGen
+    implementation retrofit
+    implementation retrofitMoshi
+    implementation glide
+    implementation timber
 
-    testImplementation rootProject.junit
-    testImplementation rootProject.mockito
-    testImplementation rootProject.mockitoKotlin
-    testImplementation rootProject.okhttpMockServer
+    testImplementation junit
+    testImplementation mockito
+    testImplementation mockitoKotlin
+    testImplementation okhttpMockServer
 
-    androidTestImplementation rootProject.androidxTestCore
-    androidTestImplementation rootProject.androidxTestRunner
-    androidTestImplementation rootProject.androidxTestRules
-    androidTestImplementation rootProject.androidxEspresso
-    androidTestImplementation rootProject.mockitoAndroid
+    androidTestImplementation androidxTestCore
+    androidTestImplementation androidxTestRunner
+    androidTestImplementation androidxTestRules
+    androidTestImplementation androidxEspresso
+    androidTestImplementation mockitoAndroid
 }
