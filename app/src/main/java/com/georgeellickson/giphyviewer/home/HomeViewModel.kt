@@ -1,14 +1,25 @@
 package com.georgeellickson.giphyviewer.home
 
 import androidx.lifecycle.*
+import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.network.ApiResponse
 import com.georgeellickson.giphyviewer.network.GiphyTrendingItem
 import com.georgeellickson.giphyviewer.storage.GiphyRepository
 import com.georgeellickson.giphyviewer.util.SingleLiveEvent
+import com.georgeellickson.giphyviewer.util.StringProvider
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
-class HomeViewModel(private val giphyRepo: GiphyRepository) : ViewModel() {
+class HomeViewModel(
+    private val giphyRepo: GiphyRepository,
+    private val stringProvider: StringProvider
+) : ViewModel() {
+
+    private val _loadingSpinnerVisible = MutableLiveData<Boolean>()
+    val loadingSpinnerVisible: LiveData<Boolean>
+        get() = _loadingSpinnerVisible
 
     private val _trendingGifs = MutableLiveData<List<GiphyTrendingItem>>()
     val trendingGifs: LiveData<List<GiphyTrendingItem>>
@@ -18,6 +29,10 @@ class HomeViewModel(private val giphyRepo: GiphyRepository) : ViewModel() {
     val navigateToSettings: LiveData<Unit>
         get() = _navigateToSettings
 
+    private val _toastMessage = SingleLiveEvent<String>()
+    val toastMessage: LiveData<String>
+        get() = _toastMessage
+
     init {
         viewModelScope.launch {
             loadGifs()
@@ -25,14 +40,29 @@ class HomeViewModel(private val giphyRepo: GiphyRepository) : ViewModel() {
     }
 
     private suspend fun loadGifs() {
-        when (val response = giphyRepo.refreshTrendingGifs()) {
+        _loadingSpinnerVisible.postValue(true)
+        val response = giphyRepo.refreshTrendingGifs()
+        delay(500)
+        when (response) {
             is ApiResponse.Success -> {
                 _trendingGifs.postValue(response.data)
             }
             is ApiResponse.Error -> {
-                // TODO use observable error
+                val error = response.error
+                if (error is HttpException) {
+                    val errorCode = error.code()
+                    if (errorCode == 403) {
+                        _toastMessage.postValue(stringProvider.getString(R.string.message_invalid_api_token))
+                        _navigateToSettings.callOnChanged()
+                    } else {
+                        _toastMessage.postValue(stringProvider.getString(R.string.message_generic_http_error, errorCode))
+                    }
+                } else {
+                    _toastMessage.postValue(stringProvider.getString(R.string.message_could_not_load_gifs, error.message))
+                }
             }
         }
+        _loadingSpinnerVisible.postValue(false)
     }
 
     fun clearApiKey() {
@@ -40,11 +70,14 @@ class HomeViewModel(private val giphyRepo: GiphyRepository) : ViewModel() {
         _navigateToSettings.callOnChanged()
     }
 
-    class Factory @Inject constructor(private val repo: GiphyRepository) : ViewModelProvider.Factory {
+    class Factory @Inject constructor(
+        private val repo: GiphyRepository,
+        private val stringProvider: StringProvider
+    ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return HomeViewModel(repo) as T
+            return HomeViewModel(repo, stringProvider) as T
         }
     }
 

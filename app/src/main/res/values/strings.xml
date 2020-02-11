@@ -6,4 +6,7 @@
     <string name="enter">Enter</string>
     <string name="menu_item_clear_api_key">Clear API Key</string>
     <string name="settings_footer">Need an API key?\n Head over to <a href="https://developers.giphy.com/dashboard/">Giphy\'s Developer Portal.</a></string>
+    <string name="message_could_not_load_gifs">Could not load gifs. Exception: %s</string>
+    <string name="message_invalid_api_token">Invalid API token</string>
+    <string name="message_generic_http_error">Error $d. Could not load gifs</string>
 </resources>

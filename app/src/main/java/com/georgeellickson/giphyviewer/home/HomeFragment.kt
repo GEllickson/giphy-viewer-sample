@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -43,12 +44,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             adapter = trendingItemAdapter
             layoutManager = GridLayoutManager(view.context, columns)
         }
+        val loadingView = view.findViewById<View>(R.id.loading_view)
 
         viewModel.trendingGifs.observe(viewLifecycleOwner, Observer { items ->
             trendingItemAdapter.submitList(items)
         })
         viewModel.navigateToSettings.observe(viewLifecycleOwner, Observer {
             requireActivity().navController.navigateTo(SettingsFragment())
+        })
+        viewModel.loadingSpinnerVisible.observe(viewLifecycleOwner, Observer {
+            loadingView.visibility = if(it) View.VISIBLE else View.GONE
+        })
+        viewModel.toastMessage.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
     }
 
