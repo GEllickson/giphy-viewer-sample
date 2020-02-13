@@ -1,6 +1,7 @@
 package com.georgeellickson.giphyviewer
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.georgeellickson.giphyviewer.home.HomeFragment
@@ -34,4 +35,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), NavController {
         }
         transaction.commit()
     }
+
+    override fun navigateTo(fragment: Fragment, sharedElement: View) {
+        supportFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .addSharedElement(sharedElement, sharedElement.transitionName)
+            .replace(android.R.id.content, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+
 }

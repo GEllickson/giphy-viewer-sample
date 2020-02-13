@@ -3,11 +3,11 @@ package com.georgeellickson.giphyviewer.home
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -23,6 +23,7 @@ import com.georgeellickson.giphyviewer.navController
 import com.georgeellickson.giphyviewer.settings.SettingsFragment
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
+
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -43,9 +44,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         toolbar = view.findViewById(R.id.toolbar)
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        val trendingItemAdapter = TrendingItemAdapter {
-            requireActivity().navController.navigateTo(ViewImageFragment.newInstance(it), true)
+        val trendingItemAdapter = TrendingItemAdapter { sharedElement, url ->
+            navigateToImageFragment(url, sharedElement)
         }
+        exitTransition = null // clear previous transition as sharedElement in reverse doesn't work yet
         // TODO consider alternative approach to item sizing and number of columns
         val isLandscape = requireContext().resources.configuration
             .orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -97,5 +99,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun navigateToImageFragment(url: String, sharedElement: View) {
+        val inflater = TransitionInflater.from(requireContext())
+        val sharedEnterTrans = inflater.inflateTransition(R.transition.shared_gif_transition)
+        val exitTrans = inflater.inflateTransition(R.transition.fade_out_transition)
+        val frag = ViewImageFragment.newInstance(url, sharedElement.transitionName)
+        frag.sharedElementEnterTransition = sharedEnterTrans
+        exitTransition = exitTrans
+        requireActivity().navController.navigateTo(frag, sharedElement)
     }
 }
