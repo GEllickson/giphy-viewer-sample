@@ -1,33 +1,49 @@
 package com.georgeellickson.giphyviewer.settings
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.georgeellickson.giphyviewer.storage.GiphyKeyPref
+import androidx.lifecycle.*
+import com.georgeellickson.giphyviewer.storage.GiphyRepository
 import com.georgeellickson.giphyviewer.util.SingleLiveEvent
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SettingsViewModel(private val pref: GiphyKeyPref) : ViewModel() {
+class SettingsViewModel(private val repo: GiphyRepository) : ViewModel() {
+
+    private val _loadingState = MutableLiveData<Boolean>()
+    val loadingState: LiveData<Boolean>
+        get() = _loadingState
 
     private val _navigateToHome = SingleLiveEvent<Unit>()
     val navigateToHome: LiveData<Unit>
         get() = _navigateToHome
 
-    fun setKey(key: String) {
+    private val _toastMessage = SingleLiveEvent<String>()
+    val toastMessage: LiveData<String>
+        get() = _toastMessage
+
+    fun tryApiKey(key: String) {
         if (key.isNotEmpty()) {
-            pref.setApiKey(key)
-            _navigateToHome.callOnChanged()
+            _loadingState.value = true
+            viewModelScope.launch {
+                when(val result = repo.tryApiKey(key)) {
+                    GiphyRepository.ApiKeyResponse.Success -> {
+                        _navigateToHome.callOnChanged()
+                    }
+                    is GiphyRepository.ApiKeyResponse.Failure -> {
+                        _toastMessage.value = result.error
+                    }
+                }
+                _loadingState.value = false
+            }
         }
-        // TODO check for valid key, give error
     }
 
 }
 
-class SettingsViewModelFactory @Inject constructor(private val pref: GiphyKeyPref) :
+class SettingsViewModelFactory @Inject constructor(private val repo: GiphyRepository) :
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        return SettingsViewModel(pref) as T
+        return SettingsViewModel(repo) as T
     }
 }

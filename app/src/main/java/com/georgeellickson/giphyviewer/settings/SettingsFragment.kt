@@ -15,6 +15,7 @@ import com.georgeellickson.giphyviewer.R
 import com.georgeellickson.giphyviewer.appComponent
 import com.georgeellickson.giphyviewer.home.HomeFragment
 import com.georgeellickson.giphyviewer.navController
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
@@ -39,17 +40,28 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val editText = view.findViewById<EditText>(R.id.edit_api_key).apply {
             setOnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    viewModel.setKey(v.text.toString())
+                    viewModel.tryApiKey(v.text.toString())
                 }
                 true
             }
         }
-        view.findViewById<Button>(R.id.button_enter).apply {
+        val button = view.findViewById<Button>(R.id.button_enter).apply {
             setOnClickListener {
-                viewModel.setKey(editText.text.toString())
+                viewModel.tryApiKey(editText.text.toString())
             }
         }
         view.findViewById<TextView>(R.id.footer).movementMethod = LinkMovementMethod.getInstance()
+
+        viewModel.loadingState.observe(viewLifecycleOwner, Observer {
+            val enabled = !it
+            editText.isEnabled = enabled
+            button.isEnabled = enabled
+            val buttonText = if (enabled) R.string.enter else R.string.loading
+            button.setText(buttonText)
+        })
+        viewModel.toastMessage.observe(viewLifecycleOwner, Observer {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
+        })
     }
 
 }

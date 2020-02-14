@@ -37,6 +37,9 @@ class HomeViewModel(
     private val isRefreshing = AtomicBoolean(false)
 
     init {
+        giphyRepo.cachedResult?.let {
+            _trendingGifs.value = it
+        }
         viewModelScope.launch {
             loadGifs()
         }
