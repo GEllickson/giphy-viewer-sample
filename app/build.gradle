@@ -67,6 +67,7 @@ dependencies {
     implementation retrofitMoshi
     implementation glide
     implementation timber
+    debugImplementation leakCanary
 
     testImplementation junit
     testImplementation mockito
