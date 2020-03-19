@@ -54,6 +54,7 @@ buildscript {
         mockito = "org.mockito:mockito-core:$mockitoVersion"
         mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
         okhttpMockServer = "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+        kotlinCoroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"
 
         // Android Test
         androidxTestVersion = "1.2.0"
