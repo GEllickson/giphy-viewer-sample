@@ -30,7 +30,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     @Inject
     lateinit var viewModelFactory: HomeViewModel.Factory
     private val viewModel: HomeViewModel by viewModels { viewModelFactory }
-    private lateinit var toolbar: Toolbar
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,8 +41,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         requireActivity().title = getString(R.string.title_home)
         setHasOptionsMenu(true)
 
-        toolbar = view.findViewById(R.id.toolbar)
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(view.findViewById(R.id.toolbar))
         val trendingItemAdapter = TrendingItemAdapter { sharedElement, url ->
             navigateToImageFragment(url, sharedElement)
         }
