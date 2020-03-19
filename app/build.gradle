@@ -73,6 +73,7 @@ dependencies {
     testImplementation mockito
     testImplementation mockitoKotlin
     testImplementation okhttpMockServer
+    testImplementation androidxArchCore
     testImplementation kotlinCoroutineTest
 
     androidTestImplementation androidxTestCore
