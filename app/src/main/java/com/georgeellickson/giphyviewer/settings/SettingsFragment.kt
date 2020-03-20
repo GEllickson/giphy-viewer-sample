@@ -21,7 +21,7 @@ import javax.inject.Inject
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     @Inject
-    lateinit var viewModelFactory: SettingsViewModelFactory
+    lateinit var viewModelFactory: SettingsViewModel.Factory
     private val viewModel: SettingsViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {

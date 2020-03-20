@@ -37,7 +37,7 @@ class SettingsViewModelTest {
 
     @Test
     fun viewModelFactory_success() {
-        val result = SettingsViewModelFactory(repo).create(SettingsViewModel::class.java)
+        val result = SettingsViewModel.Factory(repo).create(SettingsViewModel::class.java)
         assertThat(result, IsInstanceOf(SettingsViewModel::class.java))
     }
 
