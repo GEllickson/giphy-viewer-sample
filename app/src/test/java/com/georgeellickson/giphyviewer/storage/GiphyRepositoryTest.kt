@@ -84,8 +84,8 @@ class GiphyRepositoryTest {
     }
 
     companion object {
-        private const val API_KEY = "my_key"
-        private val RESULT = GiphyTrendingHolder(
+        const val API_KEY = "my_key"
+        val RESULT = GiphyTrendingHolder(
             listOf(
                 GiphyTrendingItem(
                     "id1",
