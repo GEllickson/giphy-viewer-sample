@@ -33,6 +33,10 @@ android {
             versionNameSuffix "-debug"
         }
     }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {

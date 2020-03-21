@@ -1,8 +1,9 @@
 package com.georgeellickson.giphyviewer.home
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -10,28 +11,34 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.georgeellickson.giphyviewer.R
+import com.georgeellickson.giphyviewer.databinding.FragmentViewImageBinding
 
-class ViewImageFragment : Fragment(R.layout.fragment_view_image) {
+class ViewImageFragment : Fragment() {
 
     private var isLeaving = false
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentViewImageBinding.inflate(inflater, container, false)
+        val view = binding.root
+
         view.setOnClickListener {
             if (!isLeaving) {
                 isLeaving = true
                 requireActivity().onBackPressed()
             }
         }
-        val gifView = view.findViewById<ImageView>(R.id.image_gif)
+
         val transitionName = arguments?.getString(EXTRA_TRANSITION_NAME) ?: ""
-        gifView.transitionName = transitionName
+        binding.imageGif.transitionName = transitionName
         postponeEnterTransition()
         val gifUrl = arguments?.getString(EXTRA_URL) ?: ""
         Glide.with(view)
             .asGif()
-            .listener(object: RequestListener<GifDrawable> {
+            .listener(object : RequestListener<GifDrawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
@@ -54,7 +61,8 @@ class ViewImageFragment : Fragment(R.layout.fragment_view_image) {
                 }
             })
             .load(gifUrl)
-            .into(gifView)
+            .into(binding.imageGif)
+        return view
     }
 
     companion object {
