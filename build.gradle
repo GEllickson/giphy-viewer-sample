@@ -8,63 +8,6 @@ buildscript {
 
         // Kotlin
         kotlin = "1.3.70"
-        kotlinStd = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin"
-        kotlinCoroutinesVersion = "1.3.3"
-        kotlinxCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
-        kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
-
-        // AndroidX
-        androidxAppcompat = "androidx.appcompat:appcompat:1.1.0"
-        androidxFragment = "androidx.fragment:fragment-ktx:1.2.0"
-        androidxRecyclerview = "androidx.recyclerview:recyclerview:1.1.0"
-        androidxConstraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
-        androidxCoreKtx = "androidx.core:core-ktx:1.1.0"
-        androidxLifecycle = "2.2.0"
-        androidxLifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$androidxLifecycle"
-        androidxLifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidxLifecycle"
-        androidxLifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:$androidxLifecycle"
-        androidxRoom = "2.2.3"
-        androidxRoomRuntime = "androidx.room:room-runtime:$androidxRoom"
-        androidxRoomCompiler = "androidx.room:room-compiler:$androidxRoom"
-        androidxRoomRuntime = "androidx.room:room-ktx:$androidxRoom"
-        androidxPaging = "androidx.paging:paging-runtime:2.1.1"
-        androidxWorkRuntime = "androidx.work:work-runtime:2.2.0"
-        materialComponents = "com.google.android.material:material:1.1.0-rc01"
-        swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-
-        // Non-Google
-        daggerVersion = "2.25.4"
-        dagger = "com.google.dagger:dagger:$daggerVersion"
-        daggerProcessor = "com.google.dagger:dagger-compiler:$daggerVersion"
-        okhttpVersion = "4.3.1"
-        okhttp = "com.squareup.okhttp3:okhttp:$okhttpVersion"
-        okhttpLogging = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
-        moshiVersion = "1.9.2"
-        moshi = "com.squareup.moshi:moshi:$moshiVersion"
-        moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
-        retrofitVersion = "2.7.1"
-        retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
-        retrofitMoshi = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
-        glide = "com.github.bumptech.glide:glide:4.11.0"
-        timber = "com.jakewharton.timber:timber:4.7.1"
-        leakCanary = "com.squareup.leakcanary:leakcanary-android:2.2"
-
-        // Unit Test
-        junit = "junit:junit:4.12"
-        mockitoVersion = "2.28.2"
-        mockito = "org.mockito:mockito-core:$mockitoVersion"
-        mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-        okhttpMockServer = "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
-        androidxArchCore = "androidx.arch.core:core-testing:2.1.0"
-        kotlinCoroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"
-
-        // Android Test
-        androidxTestVersion = "1.2.0"
-        androidxTestCore = "androidx.test:core:$androidxTestVersion"
-        androidxTestRunner = "androidx.test:runner:$androidxTestVersion"
-        androidxTestRules = "androidx.test:rules:$androidxTestVersion"
-        androidxEspresso = "androidx.test.espresso:espresso-core:3.2.0"
-        mockitoAndroid = "org.mockito:mockito-android:$mockitoVersion"
     }
 
     repositories {
