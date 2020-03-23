@@ -11,7 +11,8 @@ private const val KEY_API = "giphy_api_key"
 @Singleton
 class GiphyKeyPref @Inject constructor(context: Context) {
 
-    private val prefs: SharedPreferences = context.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)
+    private val prefs: SharedPreferences =
+        context.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)
 
     fun setApiKey(apiKey: String) = prefs.edit().putString(KEY_API, apiKey).apply()
 

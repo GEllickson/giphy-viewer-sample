@@ -61,10 +61,20 @@ class HomeViewModel(
                         _toastMessage.postValue(stringProvider.getString(R.string.message_invalid_api_token))
                         _navigateToSettings.callOnChanged()
                     } else {
-                        _toastMessage.postValue(stringProvider.getString(R.string.message_generic_http_error, errorCode))
+                        _toastMessage.postValue(
+                            stringProvider.getString(
+                                R.string.message_generic_http_error,
+                                errorCode
+                            )
+                        )
                     }
                 } else {
-                    _toastMessage.postValue(stringProvider.getString(R.string.message_could_not_load_gifs, error.message))
+                    _toastMessage.postValue(
+                        stringProvider.getString(
+                            R.string.message_could_not_load_gifs,
+                            error.message
+                        )
+                    )
                 }
             }
         }

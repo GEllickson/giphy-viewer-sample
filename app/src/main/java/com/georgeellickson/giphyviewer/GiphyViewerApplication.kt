@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy.Builder
 import com.georgeellickson.giphyviewer.di.AppComponent
-import com.georgeellickson.giphyviewer.di.AppModule
 import com.georgeellickson.giphyviewer.di.DaggerAppComponent
 import timber.log.Timber
 import timber.log.Timber.DebugTree

@@ -24,7 +24,7 @@ class SettingsViewModel(private val repo: GiphyRepository) : ViewModel() {
         if (key.isNotEmpty()) {
             _loadingState.value = true
             viewModelScope.launch {
-                when(val result = repo.tryApiKey(key)) {
+                when (val result = repo.tryApiKey(key)) {
                     GiphyRepository.ApiKeyResponse.Success -> {
                         _navigateToHome.callOnChanged()
                     }
